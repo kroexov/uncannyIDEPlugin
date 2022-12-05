@@ -31,6 +31,7 @@ public class UncannyErrors extends AnAction {
         });
         var smells = CodeSmellDetector.getInstance(projects[0]).findCodeSmells(collection);
         var numOfErrros = "You have " + (smells.size()-1) + " errors";
+        var returner = "Good!";
         var description = "";
         Icon icon = MyIcons.Canny1;
         if (smells.size() < 2){
@@ -38,25 +39,34 @@ public class UncannyErrors extends AnAction {
         }
         if (smells.size() >= 2){
             description = "Not canny";
+            returner = "OK...";
             icon = MyIcons.Canny2;
         }
         if (smells.size() >= 5){
             description = "Uncanny";
+            returner = "Damn";
             icon = MyIcons.Canny3;
         }
         if (smells.size() >= 10){
             description = "Very uncanny";
+            returner = "Oh no!";
             icon = MyIcons.Canny4;
         }
         if (smells.size() >= 20){
             description = "Stop this!";
+            returner = "This is not good...";
             icon = MyIcons.Canny5;
         }
         if (smells.size() >= 50){
             description = "You are fired";
+            returner = "No God please no!";
             icon = MyIcons.Canny6;
         }
-        Messages.showMessageDialog(numOfErrros, description, icon);
+        String[] options = new String[]{
+                returner
+        };
+        Messages.showDialog(numOfErrros, description, options, 0, icon);
+        //Messages.showMessageDialog(numOfErrros, description, icon);
     }
 
     @Override
