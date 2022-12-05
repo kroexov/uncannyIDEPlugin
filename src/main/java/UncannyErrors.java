@@ -5,7 +5,6 @@ import com.intellij.openapi.roots.CollectingContentIterator;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vcs.CodeSmellDetector;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +30,7 @@ public class UncannyErrors extends AnAction {
             }
         });
         var smells = CodeSmellDetector.getInstance(projects[0]).findCodeSmells(collection);
-        var numOfErrros = "You have " + smells.size() + " errors";
+        var numOfErrros = "You have " + (smells.size()-1) + " errors";
         var description = "";
         Icon icon = MyIcons.Canny1;
         if (smells.size() < 2){
